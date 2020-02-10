@@ -1,4 +1,4 @@
-const records = [
+[
   {
     "detailedObjectMap": {
       "object_type": "POSITION",
