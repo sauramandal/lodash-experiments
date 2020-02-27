@@ -5346,11 +5346,14 @@ let positionRecords = [
   }
 ];
 
+const getChunks = _.chunk(positionRecords, 20)
+console.log("Chunks", getChunks)
+
 let results = _.groupBy(
   positionRecords,
   ob => ob.detailedObjectMap.source_info.src_type
 );
-console.log(results);
+console.log(JSON.stringify(results));
 
 let countedRecords = _.countBy(
   positionRecords,
