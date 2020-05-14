@@ -5347,22 +5347,22 @@ let positionRecords = [
 ];
 
 const getChunks = _.chunk(positionRecords, 20)
-console.log("Chunks", getChunks)
+// console.log("Chunks", getChunks)
 
 let results = _.groupBy(
   positionRecords,
   ob => ob.detailedObjectMap.source_info.src_type
 );
-console.log(JSON.stringify(results));
+// console.log(JSON.stringify(results));
 
 let countedRecords = _.countBy(
   positionRecords,
   c => c.detailedObjectMap.contact.src_full_name === "MARK CUBAN"
 );
-console.log(countedRecords);
+// console.log(countedRecords);
 // console.log(results["GS-PF"]);
 let futureSumRevenue = _.chain(results["GS-PF"])
   .filter(f => f.detailedObjectMap.org_stats.assets)
   .sum()
   .value();
-console.log(futureSumRevenue);
+// console.log(futureSumRevenue);
