@@ -5734,6 +5734,8 @@ categoricalData.forEach(catData => {
     // const x = coordinate.split(',')[0];
     // const y = coordinate.split(',')[1];
     const gpdData = {
+      name: catData.name,
+      color: catData.color,
       x: coordinate.split(",")[0],
       y: coordinate.split(",")[1],
       totalConnections: grpConnection.length
