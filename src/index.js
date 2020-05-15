@@ -5726,29 +5726,40 @@ let categoricalData = [
     ]
   }
 ];
-const seriesData = [];
-categoricalData.forEach(catData => {
-  const grpCatData = _.groupBy(catData.data, item => item.x + "," + item.y);
-  console.log(grpCatData);
-  for (let [coordinate, grpConnection] of Object.entries(grpCatData)) {
-    // const x = coordinate.split(',')[0];
-    // const y = coordinate.split(',')[1];
-    const gpdData = {
-      name: catData.name,
-      color: catData.color,
-      x: coordinate.split(",")[0],
-      y: coordinate.split(",")[1],
-      totalConnections: grpConnection.length
+const draftSeriesData = [];
+categoricalData.forEach(categoryItem => {
+  let categoricalSeriesData = [];
+  const groupedCategoricalData = _.groupBy(
+    categoryItem.data,
+    item => item.x + "," + item.y
+  );
+  const groupedSeriesData = {
+    name: categoryItem.name,
+    color: categoryItem.color
+  };
+  for (let [coordinate, groupedConnection] of Object.entries(
+    groupedCategoricalData
+  )) {
+    const draftGroupedData = {
+      name: categoryItem.name,
+      netWorthScore: parseInt(coordinate.split(",")[0]),
+      strength: parseInt(coordinate.split(",")[1]),
+      netWorthRange: groupedConnection[0].netWorthRange,
+      x: parseInt(coordinate.split(",")[0]) + Math.random() * 0.25 + 0.25,
+      y: parseInt(coordinate.split(",")[1]) + Math.random() * 0.25 + 0.25,
+      clusterSize: groupedConnection.length
     };
-    const metaData = [];
-    grpConnection.forEach(c => {
-      metaData.push(c);
-    });
-    gpdData.groupedData = metaData;
-    seriesData.push(gpdData);
+    const groupedMetaData = [];
+    groupedConnection.forEach(connection => groupedMetaData.push(connection));
+    draftGroupedData.data = groupedMetaData;
+    categoricalSeriesData.push(draftGroupedData);
   }
+  groupedSeriesData.data = categoricalSeriesData;
+  // console.log('categoricalSeriesData'); console.log(categoricalSeriesData)
+  draftSeriesData.push(groupedSeriesData);
 });
-console.log(seriesData);
+console.log("draftSeriesData");
+console.log(draftSeriesData);
 
 const getChunks = _.chunk(positionRecords, 20);
 // console.log("Chunks", getChunks)
